@@ -2,7 +2,6 @@
 
 This is a Machine Learning–based web application that predicts a student’s **job interview readiness** using academic and skill data.
 
-🔗 Live Demo (optional): Add link if deployed
 
 ---
 
