@@ -15,19 +15,22 @@ st.set_page_config(
 )
 
 
-# ---------------- THEME ----------------
+# ---------------- THEME + MOBILE ----------------
 st.markdown("""
 <style>
 
+/* Layout */
 .block-container {
     padding: 1.5rem 2.5rem;
 }
 
+/* Background */
 .stApp {
     background: linear-gradient(180deg, #000000, #111111);
     font-family: 'Segoe UI', Arial, sans-serif;
 }
 
+/* Top Bar */
 header {
     background: #000000 !important;
     border-bottom: 4px solid #FFD700;
@@ -65,7 +68,7 @@ section[data-testid="stSidebar"] * {
 
 /* Title */
 .main-title {
-    font-size: 70px;
+    font-size: 72px;
     font-weight: 900;
     color: #FFD700;
     text-align: center;
@@ -83,7 +86,7 @@ section[data-testid="stSidebar"] * {
     font-size: 15px;
 }
 
-/* Buttons */
+/* Button */
 .stButton > button {
     background: linear-gradient(90deg, #FFD700, #FFC107);
     color: #000000;
@@ -110,6 +113,45 @@ h2, h3 {
 /* Text */
 p, label, span {
     color: #FFFFFF;
+}
+
+/* ---------- Mobile Responsive ---------- */
+@media (max-width: 768px) {
+
+    .block-container {
+        padding: 1rem 1rem;
+    }
+
+    .main-title {
+        font-size: 38px !important;
+    }
+
+    .sub-title {
+        font-size: 16px !important;
+    }
+
+    .tag-line {
+        font-size: 13px !important;
+    }
+
+    .card, .header-card {
+        padding: 18px !important;
+    }
+
+    .stButton > button {
+        height: 48px;
+        font-size: 16px;
+    }
+
+    h2, h3 {
+        font-size: 20px !important;
+    }
+
+    div[data-testid="column"] {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+
 }
 
 </style>
@@ -147,6 +189,7 @@ model.fit(X, y)
 
 
 # ---------------- SIDEBAR ----------------
+st.sidebar.markdown("☰ Menu")
 st.sidebar.header("🎓 Student Profile")
 
 name = st.sidebar.text_input("Student Name")
@@ -172,7 +215,7 @@ cpp = st.sidebar.slider("C++", 0, 10, 0)
 js = st.sidebar.slider("JavaScript", 0, 10, 0)
 
 
-# ---------------- PREDICTION ----------------
+# ---------------- MAIN ----------------
 if st.button("🚀 Evaluate Readiness"):
 
     skills = [python, java, c, cpp, js]
@@ -225,7 +268,7 @@ if st.button("🚀 Evaluate Readiness"):
     st.write("Score:", score,"/100")
 
 
-    # ---------------- RADAR CHART ----------------
+    # ---------------- RADAR ----------------
     st.subheader("📈 Skill Radar Chart")
 
     labels = ["Python","Java","C","C++","JS"]
@@ -238,7 +281,7 @@ if st.button("🚀 Evaluate Readiness"):
         values = np.concatenate((values,[values[0]]))
         angles = np.concatenate((angles,[angles[0]]))
 
-        fig,ax = plt.subplots(figsize=(6,6),subplot_kw=dict(polar=True))
+        fig,ax = plt.subplots(figsize=(5,5),subplot_kw=dict(polar=True))
 
         ax.plot(angles,values,color="#FFD700",linewidth=2)
         ax.fill(angles,values,color="#FFD700",alpha=0.25)
@@ -292,7 +335,7 @@ if st.button("🚀 Evaluate Readiness"):
     st.markdown("</div>", unsafe_allow_html=True)
 
 
-# ---------------- ATS RESUME ANALYZER ----------------
+# ---------------- ATS ----------------
 st.markdown("<div class='card'>", unsafe_allow_html=True)
 
 st.subheader("📄 ATS Resume Analyzer")
@@ -361,7 +404,7 @@ if resume_file:
 st.markdown("</div>", unsafe_allow_html=True)
 
 
-# ---------------- AI CAREER MENTOR ----------------
+# ---------------- AI BOT ----------------
 st.markdown("<div class='card'>", unsafe_allow_html=True)
 
 st.subheader("🤖 AI Career Mentor")
@@ -383,10 +426,10 @@ def career_bot(q):
         return "Add measurable achievements and relevant keywords."
 
     if "internship" in q:
-        return "Apply on LinkedIn, Internshala, and company portals."
+        return "Apply on LinkedIn, Internshala and company portals."
 
     if "c language" in q:
-        return "Practice pointers, structures, and memory management."
+        return "Practice pointers, memory management, and structures."
 
     return "Stay consistent and improve your profile daily."
 
@@ -402,6 +445,6 @@ st.markdown("""
 <hr style="border:3px solid #FFD700;">
 
 <p style="text-align:center; color:#FFD700; font-weight:500;">
-Developed by Machavarapu Abhiram | Placement Intelligence System
+Developed by Machavarapu Abhiram | 2026 | Job Readiness Prediction System
 </p>
 """, unsafe_allow_html=True)
